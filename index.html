@@ -12,18 +12,21 @@
                 background-color: #f0f0f0;
             }
             content {
-                font-family: sans-serif;
                 display: flex;
+                flex-wrap: wrap;         /* ✅ ให้ wrap ได้เมื่อจอแคบ */
                 justify-content: center;
-                gap: 40px;
-                padding: 40px;
+                gap: 20px;
+                padding: 20px;
+                box-sizing: border-box;
+                max-width: 100%;
             }
-
             #left, #right {
                 border: 1px solid #aaa;
                 padding: 16px;
-                width: 250px;
+                width: 100%;             /* ✅ ใช้ 100% บนจอเล็ก */
+                max-width: 300px;        /* ✅ จำกัดความกว้างไม่ให้ใหญ่เกินไป */
                 background-color: #fff;
+                box-sizing: border-box;
             }
             #right{
                 display: flex;
@@ -65,12 +68,14 @@
                 cursor: pointer;	
             }
             .default{background-color: gray;}
-
             .red {background-color: red;}
-
             .yellow {background-color: gold; color: black;}
-
             .green {background-color: green;}
+            @media (max-width: 600px) {
+                h3 {font-size: 1.3em;}
+                .value-wrapper {font-size: 3em;}
+                .light-button {width: 60px; height: 60px;}
+            }
         </style>
     </head>
     <body>
