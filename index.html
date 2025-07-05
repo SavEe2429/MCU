@@ -42,39 +42,55 @@
                 justify-content: center;
             }
             .value-wrapper {
-                font-size: 3em;
+                font-size: 4em;
                 font-weight: bold;
             }
 
-            /* ปุ่มไฟ */
-            .traffic-light {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding-top: 8px;
-                font-size: medium;
-                font-weight: 600;
-            }
-
-            .light-button {
+            .switch {
+                position: relative;
+                display: inline-block;
                 width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                border: none;
-                color: white;
-                font-weight: bold;
-                font-size: 1em;
-                margin: 6px 0;
-                cursor: pointer;	
+                height: 34px;
+                margin-top: 5%;
             }
-            .default{background-color: gray;}
-            .red {background-color: red;}
-            .yellow {background-color: gold; color: black;}
-            .green {background-color: green;}
-            @media (max-width: 600px) {
-                h3 {font-size: 1.3em;}
-                .value-wrapper {font-size: 3em;}
-                .light-button {width: 60px; height: 60px;}
+            
+            /* Hide the default checkbox */
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            /* Slider */
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: red;
+                transition: 0.4s;
+                border-radius: 34px;
+            }
+            /* Slider Circle */
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: 0.4s;
+                border-radius: 50%;
+            }
+            /* Checked State */
+            input:checked + .slider {
+                background-color: #4caf50;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(46px);
             }
         </style>
     </head>
@@ -87,14 +103,10 @@
             <div id="left">
                 <h3 >Control LED State</h3>
 			    <hr>
-                <div class="traffic-light">
-                    RED
-                    <p><a href="/red/on"><button class="light-button default">ON</button></a></p>
-                    YELLOW
-                    <p><a href="/yellow/on"><button class="light-button default">ON</button></a></p>
-                    GREEN
-                    <p><a href="/green/on"><button class="light-button default">ON</button></a></p>
-                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-switch">
+                    <span class="slider"></span>
+                </label>
             </div>
 
             <div id="right">
@@ -102,8 +114,8 @@
                 <hr style="width: 250px;">
                 <div class="center-wrapper">
                     <div class="value-wrapper">
-                        <span>123</span>
-                        <span>cm</span>
+                        <!-- <span id="distance">--</span> -->
+                        <span id="">12133 cm</span>
                     </div>
                 </div>
             </div>
