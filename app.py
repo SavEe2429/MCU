@@ -10,7 +10,7 @@ def index():
 @app.route("/distance")
 def get_distance():
     # ส่งค่าระยะจำลองระหว่าง 5-30 cm
-    return str(random.randint(5, 11))
+    return str(random.randint(1, 45))
 
 @app.route("/led/on")
 def led_on():
