@@ -130,27 +130,28 @@
         </header>
 
         <content>
+            <!-- LED Control Section -->
             <div id="left">
                 <h3 >Control LED State</h3>
 			    <hr>
                 <label class="switch">
-                    <input type="checkbox" id="toggle-switch">
-                    <a href="/ON"><span class="slider"></span></a>
+                    <input type="checkbox" id="toggle-switch" onchange="test_handleSwitch(this)">
+                    <span class="slider"></span>
                 </label>
             </div>
-
+            <!-- Ultrasonic Sensor Data Section-->
             <div id="right">
                 <h3>Ultrasonic Sensor Data</h3>
                 <hr style="width: 250px;">
                 <div class="center-wrapper">
                     <div class="value-wrapper">
-                        <!-- <span id="distance">--</span> -->
                         <span id="distance">--</span>
                     </div>
                 </div>
             </div>
             
         </content>
+        <!-- Message Boxes -->
         <div id="message">
             <div class="alert-box" id="warning">⚠️ Warning ⚠️</div>
             <div class="alert-box" id="danger">❗️ DANGER!!! ❗️</div>
@@ -169,8 +170,6 @@
             document.getElementById('distance').innerText = data + ' cm';
             });
         }
-        // setInterval(updateDistance, 1000); // อัปเดตทุก 1 วินาที
-        // window.onload = updateDistance;
 
         function test_updateDistance() {
         fetch('http://127.0.0.1:5000/distance')
@@ -198,9 +197,14 @@
             });
     }
 
+        function test_handleSwitch(checkbox){
+            const url = checkbox.checked ? '/ON' : '/OFF';
+            fetch(url)
+                .then(response => console.log(`Sent ${url}`))
+                .catch(error => console.error('Switch failed:', error));
+        }
+
         setInterval(test_updateDistance, 1000); // อัปเดตทุก 1 วินาที
         window.onload = test_updateDistance;
-
-
     </script>
 </html>
