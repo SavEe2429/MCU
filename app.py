@@ -1,12 +1,16 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 import random
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return send_from_directory('.', 'index.html')
+
 @app.route("/distance")
 def get_distance():
     # ส่งค่าระยะจำลองระหว่าง 5-30 cm
-    return str(random.randint(5, 30))
+    return str(random.randint(5, 11))
 
 @app.route("/led/on")
 def led_on():
