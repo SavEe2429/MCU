@@ -96,7 +96,7 @@
     </head>
     <body>
         <header>
-          <h1>Webserver</h1>
+          <h1>ESP8266 Control</h1>
         </header>
 
         <content>
@@ -105,7 +105,7 @@
 			    <hr>
                 <label class="switch">
                     <input type="checkbox" id="toggle-switch">
-                    <span class="slider"></span>
+                    <a href="/ON"><span class="slider"></span></a>
                 </label>
             </div>
 
@@ -115,7 +115,7 @@
                 <div class="center-wrapper">
                     <div class="value-wrapper">
                         <!-- <span id="distance">--</span> -->
-                        <span id="">12133 cm</span>
+                        <span id="distance">12133</span>
                     </div>
                 </div>
             </div>
@@ -135,5 +135,29 @@
         }
         setInterval(updateDistance, 1000); // อัปเดตทุก 1 วินาที
         window.onload = updateDistance;
+
+        function updateDistance2() {
+        fetch('/distance')
+            .then(response => response.text())
+            .then(data => {
+                const distance = parseFloat(data);
+                const distanceSpan = document.getElementById('distance');
+                const alertMessage = document.getElementById('alert-message');
+                const body = document.getElementById('body');
+
+                // แสดงระยะ
+                distanceSpan.innerText = distance;
+
+                // ตรวจระยะ < 10 cm
+                if (distance < 10) {
+                    body.style.backgroundColor = '#ffcccc'; // สีแดงอ่อน
+                    alertMessage.innerText = '⚠️ ระยะใกล้เกินไป!';
+                } else {
+                    body.style.backgroundColor = '#f0f0f0'; // กลับเป็นปกติ
+                    alertMessage.innerText = '';
+                }
+            })
+    }
+
     </script>
 </html>
