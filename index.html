@@ -35,6 +35,36 @@
                 align-items: center;       
                 text-align: center;  
             }
+            #message {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+            .alert-box{
+                color: black;
+                padding: 10px;
+                /* display: flex; */
+                /* justify-content: space-around; */
+                font-weight: bold;
+                font-size: 2em;
+                border-radius: 6px;
+                margin: 10px auto;
+                width: 100%; 
+                max-width: 250px; 
+                transition: opacity 0.3s ease;
+            }
+            #warning{
+                background-color: #ffffcc;
+                border-left: 5px solid #ff9800;
+            }
+            #danger{
+                background-color: #ffcccc;
+                border-left: 5px solid #ff0000;
+            }
+            #safe{
+                background-color: #ccffcc;
+                border-left: 5px solid #2e7d32; ;
+            }
             .center-wrapper {
                 flex: 1; 
                 display: flex;
@@ -94,7 +124,7 @@
             }
         </style>
     </head>
-    <body>
+    <body id="body">
         <header>
           <h1>ESP8266 Control</h1>
         </header>
@@ -115,11 +145,17 @@
                 <div class="center-wrapper">
                     <div class="value-wrapper">
                         <!-- <span id="distance">--</span> -->
-                        <span id="distance">12133</span>
+                        <span id="distance">--</span>
                     </div>
                 </div>
             </div>
+            
         </content>
+        <div id="message">
+            <div class="alert-box" id="warning">⚠️ Warning ⚠️</div>
+            <div class="alert-box" id="danger">❗️ DANGER!!! ❗️</div>
+            <div class="alert-box" id="safe">✔️ SAFE ✔️</div>
+        </div>
         <!-- <p><a href="/ON"><button>เปิดไฟ</button></a></p>
         <p><a href="/OFF"><button>ปิดไฟ</button></a></p>
         <h2>ระยะจาก HC-SR04: <span id="distance">--</span></h2> -->
@@ -133,31 +169,38 @@
             document.getElementById('distance').innerText = data + ' cm';
             });
         }
-        setInterval(updateDistance, 1000); // อัปเดตทุก 1 วินาที
-        window.onload = updateDistance;
+        // setInterval(updateDistance, 1000); // อัปเดตทุก 1 วินาที
+        // window.onload = updateDistance;
 
-        function updateDistance2() {
-        fetch('/distance')
+        function test_updateDistance() {
+        fetch('http://127.0.0.1:5000/distance')
             .then(response => response.text())
             .then(data => {
                 const distance = parseFloat(data);
-                const distanceSpan = document.getElementById('distance');
-                const alertMessage = document.getElementById('alert-message');
-                const body = document.getElementById('body');
+                document.getElementById('distance').innerText = distance + ' cm';
 
-                // แสดงระยะ
-                distanceSpan.innerText = distance;
-
-                // ตรวจระยะ < 10 cm
+                const warnbox = document.getElementById('warning');
+                const safebox = document.getElementById('safe');
+                const dangerbox = document.getElementById('danger');
+                dangerbox.style.display = 'none';
+                warnbox.style.display = 'none';
+                safebox.style.display = 'none';
                 if (distance < 10) {
-                    body.style.backgroundColor = '#ffcccc'; // สีแดงอ่อน
-                    alertMessage.innerText = '⚠️ ระยะใกล้เกินไป!';
+                    dangerbox.style.display = 'block';
+                } else if (distance < 30) {
+                    warnbox.style.display = 'block';
                 } else {
-                    body.style.backgroundColor = '#f0f0f0'; // กลับเป็นปกติ
-                    alertMessage.innerText = '';
+                    safebox.style.display = 'block';
                 }
             })
+            .catch(error => {
+                console.error("Fetch failed:", error);
+            });
     }
+
+        setInterval(test_updateDistance, 1000); // อัปเดตทุก 1 วินาที
+        window.onload = test_updateDistance;
+
 
     </script>
 </html>
