@@ -12,11 +12,11 @@ def get_distance():
     # ส่งค่าระยะจำลองระหว่าง 5-30 cm
     return str(random.randint(1, 45))
 
-@app.route("/led/on")
+@app.route("/ON")
 def led_on():
     return "LED turned ON"
 
-@app.route("/led/off")
+@app.route("/OFF")
 def led_off():
     return "LED turned OFF"
 
