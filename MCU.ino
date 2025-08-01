@@ -5,9 +5,9 @@ const char *password = "abcdefabcd";
 
 WiFiServer server(80);
 
-const int ledPin = D1;
-const int trigPin = D5;
-const int echoPin = D6;
+const int trigPin = D1;
+const int echoPin = D2;
+const int ledPin = D3;
 
 void setup()
 {
