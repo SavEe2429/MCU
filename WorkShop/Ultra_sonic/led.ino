@@ -1,6 +1,6 @@
-int led1 = 5;  // ไฟดวงที่ 1
-int led2 = 6;  // ไฟดวงที่ 2
-int led3 = 7;  // ไฟดวงที่ 3
+int led1 = D5;  // ไฟดวงที่ 1
+int led2 = D6;  // ไฟดวงที่ 2
+int led3 = D7;  // ไฟดวงที่ 3
 
 void setup() {
   pinMode(led1, OUTPUT);
