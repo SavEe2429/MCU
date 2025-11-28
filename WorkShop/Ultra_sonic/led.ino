@@ -1,29 +1,31 @@
-int led1 = D5;  // ไฟดวงที่ 1
-int led2 = D6;  // ไฟดวงที่ 2
-int led3 = D7;  // ไฟดวงที่ 3
+const int red = D5;     // LED ดวงสีแดง
+const int yellow = D6;  // LED ดวงสีเหลือง
+const int green = D7;   // LED ดวงสีเขียว
 
 void setup() {
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
+  // กำหนดขา LED เป็น OUTPUT เพื่อให้สามารถจ่ายไฟได้
+  pinMode(red, OUTPUT);
+  pinMode(yellow, OUTPUT);
+  pinMode(green, OUTPUT);
 }
 
 void loop() {
   // ไฟดวงที่ 1 ติด 
-  digitalWrite(led1, HIGH);
-  delay(700);   
+  digitalWrite(red, HIGH);  // เปิด LED ดวงสีแดง
+  delay(700);               // หน่วงเวลา 700 ms -> 0.7 วินาที
 
-  // ไฟดวงที่ 2 ติด 
-  digitalWrite(led2, HIGH);
-  delay(700);
+  // ไฟดวงที่ 2 ติด
+  digitalWrite(yellow, HIGH); // เปิด LED ดวงสีเหลือง
+  delay(700);                 // หน่วงเวลา 700 ms -> 0.7 วินาที
 
   // ไฟดวงที่ 3 ติด 
-  digitalWrite(led3, HIGH);
-  delay(700);
+  digitalWrite(green, HIGH);  // เปิด LED ดวงสีเขียว
+  delay(700);                 // หน่วงเวลา 700 ms -> 0.7 วินาที
 
-  
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
-  delay(1200);  // เว้นรอบให้ชัดเจนก่อนเริ่มรอบใหม่
+  // ดับไฟทั้งหมด 
+  digitalWrite(red, LOW);     // ปิด LED ดวงสีแดง
+  digitalWrite(yellow, LOW);  // ปิด LED ดวงสีเหลือง
+  digitalWrite(green, LOW);   // ปิด LED ดวงสีเขียว
+
+  delay(1200);                // หน่วงเวลา 1200 ms -> 1.2 วินาที
 }
