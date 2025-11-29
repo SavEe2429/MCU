@@ -17,7 +17,7 @@ void loop() {
   // ไฟดวงที่ 2 ติด
   digitalWrite(yellow, HIGH); // เปิด LED ดวงสีเหลือง
   delay(700);                 // หน่วงเวลา 700 ms -> 0.7 วินาที
-              // หน่วงเวลา 700 ms -> 0.7 วินาที
+
 
   // ดับไฟทั้งหมด 
   digitalWrite(red, LOW);     // ปิด LED ดวงสีแดง
